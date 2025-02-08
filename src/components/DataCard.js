@@ -5,7 +5,7 @@ const DataCard = ({ formData }) => {
     <div className="data-card">
       <h2>Type of submission:</h2>
       {/* The type of submission should be viewed in the p-tag below */}
-      <p></p>
+      <p>{formData.type}</p>
       <h3>Card Details:</h3>
       <p>
         <strong>Name:</strong> {formData.name}

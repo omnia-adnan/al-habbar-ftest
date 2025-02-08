@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "./components/Modal";
 import MainForm from "./components/MainForm";
 import DataCard from "./components/DataCard";
+import mockData from "./data/mockData";
 
 const App = () => {
   const [formData, setFormData] = useState({});
@@ -19,10 +20,16 @@ const App = () => {
     ) {
       setErrMsg("Please fill in all fields before submitting.");
       return;
+    }else{
+      setSubmittedData([...submittedData, {...formData, type: "Manual Submission"}]);
+      setFormData({});
     }
   };
 
-  const autoSubmit = () => {};
+  const autoSubmit = () => {
+      setSubmittedData([...submittedData, {...mockData, type: "Automatic Submission"}]);
+  };
+  
 
   useEffect(() => {
     if (errMsg || successMsg) {
@@ -57,10 +64,10 @@ const App = () => {
         />
 
         <div>
-          <button> Automatic Submit </button>
+          <button onClick={autoSubmit}> Automatic Submit </button>
           <button onClick={manualSubmit}>Manual Submit</button>
         </div>
-      </div>
+        </div>
 
       <div className="cards-container">
         {submittedData.map((data, index) => (
